@@ -1,14 +1,14 @@
-# 🌡️ CoolRoute: Urban Heat Island Navigation
+# 🌡️ CoolCommute: Urban Heat Island Navigation
 
 **Winner / Submission for the FortyGuard Hackathon**
 
-CoolRoute is an intelligent navigation application designed to combat Urban Heat Islands (UHI). While traditional GPS apps route you based on the *fastest* path, CoolRoute leverages **FortyGuard's advanced temperature API** and **Mapbox Directions** to calculate the *coolest* path, protecting pedestrians, cyclists, and outdoor workers from extreme thermal exposure.
+CoolCommute is an intelligent navigation application designed to combat Urban Heat Islands (UHI). While traditional GPS apps route you based on the *fastest* path, CoolCommute leverages **FortyGuard's advanced temperature API** and **Mapbox Directions** to calculate the *coolest* path, protecting pedestrians, cyclists, and outdoor workers from extreme thermal exposure.
 
 ## 🚀 The Problem
 Urban Heat Islands cause cities to be significantly hotter than surrounding rural areas due to concrete and lack of greenery. During heatwaves, walking or biking through specific "micro-climate hotspots" can be dangerous. Standard navigation apps do not take environmental temperature into account.
 
 ## 💡 Our Solution
-CoolRoute dynamically analyzes your route against live temperature data. If your fastest route intersects with a high-risk thermal zone (e.g., a massive sun-baked parking lot or an unshaded industrial district), CoolRoute will automatically generate an alternative path that avoids the worst of the heat—trading a few extra minutes of travel time for a significantly safer thermal experience.
+CoolCommute dynamically analyzes your route against live temperature data. If your fastest route intersects with a high-risk thermal zone (e.g., a massive sun-baked parking lot or an unshaded industrial district), CoolCommute will automatically generate an alternative path that avoids the worst of the heat—trading a few extra minutes of travel time for a significantly safer thermal experience.
 
 ## ✨ Features
 - **Thermal-Aware Routing**: Calculates a "Heat Penalty" for every route option based on intersection with heat zones.

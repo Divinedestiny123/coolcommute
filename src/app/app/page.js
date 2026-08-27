@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Navigation, MapPin, Loader2 } from 'lucide-react';
+import { ArrowLeft, Navigation, MapPin, Loader2, AlertTriangle } from 'lucide-react';
 import Map, { Marker, Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -29,6 +29,12 @@ export default function AppRoute() {
   const [routeCalculated, setRouteCalculated] = useState(false);
   const [routes, setRoutes] = useState(null);
   const [heatData, setHeatData] = useState(null);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message) => {
+    setToast({ message });
+    setTimeout(() => setToast(null), 5000); // Hide after 5 seconds
+  };
 
   let searchTimeout;
   
@@ -112,13 +118,13 @@ export default function AppRoute() {
         destRes = await fetch(destUrl);
       } catch (fetchErr) {
         console.error("Fetch Network Error:", fetchErr);
-        alert(`Network Error when contacting Mapbox. URL: ${originUrl}\nCheck your ad-blocker or internet connection.`);
+        showToast(`Network Error contacting Mapbox. Check ad-blocker.`);
         setIsCalculating(false);
         return;
       }
 
       if (!originRes.ok || !destRes.ok) {
-        alert("Mapbox Geocoding API returned an error status.");
+        showToast("Mapbox Geocoding API returned an error status.");
         setIsCalculating(false);
         return;
       }
@@ -127,7 +133,7 @@ export default function AppRoute() {
       const destData = await destRes.json();
 
       if (!originData.features.length || !destData.features.length) {
-        alert("Could not find locations");
+        showToast("Could not find locations. Try another search.");
         setIsCalculating(false);
         return;
       }
@@ -346,6 +352,14 @@ export default function AppRoute() {
       {/* Map Area */}
       <div className="app-map-container">
         
+        {/* Error Toast */}
+        {toast && (
+          <div className="animate-fade-in glass-panel" style={{ position: 'absolute', top: '1.5rem', left: '50%', transform: 'translateX(-50%)', zIndex: 100, display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1.5rem', color: '#ff8a8a', border: '1px solid rgba(244, 63, 94, 0.3)', backgroundColor: 'rgba(20, 10, 15, 0.8)' }}>
+            <AlertTriangle size={18} />
+            <span style={{ fontWeight: 500, fontSize: '0.875rem' }}>{toast.message}</span>
+          </div>
+        )}
+
         {/* Map Style Toggle */}
         <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', zIndex: 10, display: 'flex', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--glass-border)', overflow: 'hidden', boxShadow: 'var(--glass-shadow)' }}>
           <button 
